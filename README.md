@@ -7,7 +7,7 @@ My working repo for [Build Your Own Git](https://shipthatcode.com/courses/build-
 ## What you need
 
 - **git** and a terminal (macOS/Linux: the built-in one; Windows: see below)
-- a C compiler — `gcc` or `clang` (macOS: `xcode-select --install`, Ubuntu: `sudo apt install build-essential`, Windows: MinGW via Git Bash or WSL). Single-file, standard library only — no OpenSSL or other external libraries, same as the grader, which runs GCC 15 in C23 mode with `-lm`
+- a C++ compiler — `g++` or `clang++` (macOS: `xcode-select --install`, Ubuntu: `sudo apt install build-essential`, Windows: MinGW or WSL). Single-file, standard library only — the grader runs GCC 15 in C++23 mode, so `std::optional`, `std::variant`, `string_view`, structured bindings, ranges and `<print>` all work
 - any editor you like — VS Code, Vim, JetBrains, anything
 
 ### On Windows
@@ -35,14 +35,14 @@ Use **WSL** if you can: run `wsl --install` in an admin PowerShell once, then do
 
 ## The lesson loop
 
-1. Read the lesson on shipthatcode, write your code in `main.c` here.
+1. Read the lesson on shipthatcode, write your code in `main.cpp` here.
 2. Test locally against **the lesson you're on**: `./run_tests.sh 01`, `./run_tests.sh 02`, and so on. On Windows, run this inside Git Bash. (A bare `./run_tests.sh` runs every lesson's tests, which is only useful on courses where one program answers all of them — see below.)
 3. When it passes: `git add -A && git commit -m "lesson 01" && git push`
 4. Hit **Check my solution** on the lesson page — shipthatcode pulls this repo and grades it against the full suite, including hidden tests.
 
 ## How this repo is laid out
 
-- `main.c` — the program you're grading right now.
+- `main.cpp` — the program you're grading right now.
 - `tests/` — the public test cases per lesson (`tests/01-…/1.in` → expected `1.out`).
 - `run_tests.sh` — the local runner. `.shipthatcode.json` tells the grader what this repo is; don't delete either.
 
@@ -50,7 +50,7 @@ Use **WSL** if you can: run `wsl --install` in an admin PowerShell once, then do
 
 Each lesson states its own input and output format, and **most lessons are a separate exercise rather than a bigger version of the last one**. Two lessons can be handed the same input line and correctly want different output — a tokenizer prints `[ls] [-la]`, while the next lesson, which receives already-tokenized input, prints `ls -la`. No single program can satisfy both, and it isn't supposed to.
 
-So treat `main.c` as the file for the lesson you're grading: when you move on, change what it does. Nothing is lost — every earlier lesson is in your git history (`git log`, `git show`), and shipthatcode remembers each lesson you passed, so a lesson stays completed even after you replace the code that passed it. If you'd rather keep the code visible, copy it aside first (`cp main.c solutions/01-<lesson>.c`) — extra files are ignored by the grader.
+So treat `main.cpp` as the file for the lesson you're grading: when you move on, change what it does. Nothing is lost — every earlier lesson is in your git history (`git log`, `git show`), and shipthatcode remembers each lesson you passed, so a lesson stays completed even after you replace the code that passed it. If you'd rather keep the code visible, copy it aside first (`cp main.cpp solutions/01-<lesson>.cpp`) — extra files are ignored by the grader.
 
 When a lesson genuinely does build on the previous one, its own text says so and its tests will pass with the earlier behaviour still in place.
 
